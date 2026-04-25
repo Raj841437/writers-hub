@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+
+    <style>
+        body {
+            background: #0f0f0f;
+            color: white;
+            font-family: sans-serif;
+        }
+
+        .container {
+            width: 60%;
+            margin: auto;
+        }
+
+        .box {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>{{ profile_user.username }}'s Profile</h1>
+{% if user.is_authenticated and user != profile_user %}
+    <a href="{% url 'send_request' profile_user.username %}">
+        ➕ Send Friend Request
+        <a href="{% url 'chat' profile_user.username %}">
+    💬 Chat
+</a>
+    </a>
+{% endif %}
+
+<div class="box">
+    <p><b>Bio:</b> {{ profile.bio }}</p>
+</div>
+
+<h2>Posts</h2>
+
+{% for post in posts %}
+<div class="box">
+    <p>{{ post.content }}</p>
+</div>
+{% endfor %}
+
+</div>
+
+</body>
+</html>
